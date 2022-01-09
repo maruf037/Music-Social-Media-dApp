@@ -1,5 +1,5 @@
-const socialMusic = artifacts.require("/.SocialMusic.sol");
+const SocialMusic = artifacts.require("./SocialMusic.sol");
 
 module.exports = function (deployer) {
-  deployer.deploy(socialMusic);
+  deployer.deploy(SocialMusic);
 };
