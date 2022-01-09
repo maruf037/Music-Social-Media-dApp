@@ -60,9 +60,10 @@ module.exports = {
      ropsten: {
      networkCheckTimeout: 10000000,
      timeoutBlocks: 200000,
-     provider: () => new HDWalletProvider(mnemonic, `https://ropsten.infura.io/v3/dd262a161c6d424ab5fb93dc65d9e34f`),
+     provider: () => new HDWalletProvider(mnemonic, `wss://ropsten.infura.io/ws/v3/dd262a161c6d424ab5fb93dc65d9e34f`),
      network_id: 3,       // Ropsten's id
-     gas: 8000000,        // Ropsten has a lower block limit than mainnet
+     gas: 6721975, 
+     gasPrice: 20000000000,       // Ropsten has a lower block limit than mainnet
      confirmations: 2,    // # of confs to wait between deployments. (default: 0)
      timeoutBlocks: 200,  // # of blocks before a deployment times out  (minimum/default: 50)
      skipDryRun: true     // Skip dry run before migrations? (default: false for public nets )
