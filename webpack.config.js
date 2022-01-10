@@ -12,11 +12,20 @@ module.exports = {
         rules: [
             {
                 test: /\.js/,
+                test: /\.css$/,
                 exclude: /node_module/,
                 use: [
                 {loader: 'babel-loader',
                     options: {
-                        presets: ["react","es2015"],
+                        presets: [
+                            "@babel/preset-env",
+                            "@babel/preset-react",
+
+                        ],
+                        plugins: [
+                            "transform-class-properties",
+                            "transform-object-rest-spread"
+                        ]
                     }
                 },
                 {loader: 'style-loader'},
