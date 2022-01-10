@@ -13,12 +13,15 @@ module.exports = {
             {
                 test: /\.js/,
                 exclude: /node_module/,
-                use: {
-                    loader: 'babel-loader',
+                use: [
+                {loader: 'babel-loader',
                     options: {
                         presets: ["react","es2015"],
                     }
-                }
+                },
+                {loader: 'style-loader'},
+                {loader: 'css-loader'}
+            ]
             }
         ]
     },
