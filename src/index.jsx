@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDom from 'react-dom'
-import './index.css';
+import web3 from 'web3'
+import './index.css'
 
 class Main extends React.Component {
     constructor() {
@@ -53,6 +54,26 @@ class Recommendation extends React.Component {
                 <div className='recommendation-address'>{this.props.address}</div>
                 <div className='recommendation-song'>{this.props.song}</div>
             </div>
+        )
+    }
+}
+
+class Form extends React.Component {
+    constructor() {
+        super()
+    }
+
+    render () {
+        return (
+            <form className={this.props.className}>
+                <input type='text' ref='form-name' placeholder='Your Name'/>
+                <input type='number' ref='form-age' placeholder='Your age'/>
+                <textarea ref='form-state' placeholder='Your state, a description about yourself'></textarea>
+                <div>
+                    <button>Cancel</button>
+                    <button>Submit</button>
+                </div>
+            </form>
         )
     }
 }

@@ -43,5 +43,16 @@ module.exports = {
             template: './src/index.html',
             filename: './index.html'
         })
-    ]
+    ],
+    resolve: {
+        extensions: [".tsx", ".ts", ".js", ".json", "jsx"],
+        fallback: { 
+            path: require.resolve("path-browserify"),
+            os: require.resolve("os-browserify/browser"),
+            https: require.resolve("https-browserify"),
+            http: require.resolve("stream-http"),
+            crypto: require.resolve("crypto-browserify"),
+            stream: require.resolve("stream-browserify")
+        },   
+    }
 }
