@@ -1,9 +1,10 @@
 const path = require('path')
 const html = require('html-webpack-plugin')
+require('babel-polyfill')
 
 module.exports = {
     mode: 'production',
-    entry: './src/index.jsx',
+    entry: ['babel-polyfill', './src/index.jsx'],
     output: {
         filename: 'bundle.js',
         path: path.join(__dirname, 'dist')
@@ -19,7 +20,6 @@ module.exports = {
                         presets: [
                             "@babel/preset-env",
                             "@babel/preset-react",
-
                         ],
                         plugins: [
                             "transform-class-properties",
@@ -45,7 +45,6 @@ module.exports = {
         })
     ],
     resolve: {
-        extensions: [".tsx", ".ts", ".js", ".json", "jsx"],
         fallback: { 
             path: require.resolve("path-browserify"),
             os: require.resolve("os-browserify/browser"),

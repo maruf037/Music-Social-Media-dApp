@@ -1,10 +1,16 @@
 import React from 'react'
 import ReactDom from 'react-dom'
+import myWEB3 from 'web3'
 import './index.css'
+import ABI from './socialMusic.json'
 
 class Main extends React.Component {
     constructor() {
         super()
+
+        window.myWeb3 = new myWEB3(myWEB3.givenProvider)
+        const contractAddress = '0x1a4B47A705030FfCd7718BFF94161CF83505c681'
+        const abi = ABI.abi
 
         this.state = {
             isFormHidden: true
