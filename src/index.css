@@ -49,3 +49,24 @@ button:hover {
     font-size: 16pt;
     margin-top: 10px;
 }
+
+.hidden {
+    display: none;
+}
+
+.form-input {
+    display: block;
+    width: 200px;
+    border-radius: 20px;
+    padding: 20px;
+    border: 1px solid #444444;
+    margin: 10px auto;
+}
+
+.form-textarea {
+    height: 200px;
+}
+
+.cancel-button {
+    margin-right: 10px;
+}

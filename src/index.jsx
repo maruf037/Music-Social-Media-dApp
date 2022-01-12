@@ -5,6 +5,10 @@ import './index.css'
 class Main extends React.Component {
     constructor() {
         super()
+
+        this.state = {
+            isFormHidden: true
+        }
     }
 
     render() {
@@ -13,10 +17,15 @@ class Main extends React.Component {
                 <h1>Welcome to Decentralized Social Music!</h1>
                 <p>Setup your account, start adding musical recommendations for your friends and follow people that may interest you.</p>
                 <div className="button-container">
-                    <button>Setup Account</button>
+                    <button onClick={() => {if(this.state.isFormHidden)
+                        this.setState({isFormHidden: false})
+                        else this.setState({isFormHidden: true})}}>Setup Account</button>
                     <button>Add Music</button>
                     <button>Follow People</button>
                 </div>
+
+                <Form className={this.state.isFormHidden ? 'hidden' : ''} />
+
                 <h3>Latest musical recommendations from people using the dApp</h3>
                 <div ref="general-recommendations">
                     <Recommendation name="Maruf"
@@ -65,11 +74,11 @@ class Form extends React.Component {
     render () {
         return (
             <form className={this.props.className}>
-                <input type='text' ref='form-name' placeholder='Your Name'/>
-                <input type='number' ref='form-age' placeholder='Your age'/>
-                <textarea ref='form-state' placeholder='Your state, a description about yourself'></textarea>
+                <input className='form-input' type='text' ref='form-name' placeholder='Your Name'/>
+                <input className='form-input' type='number' ref='form-age' placeholder='Your age'/>
+                <textarea className='form-input form-textarea' ref='form-state' placeholder='Your state, a description about yourself'></textarea>
                 <div>
-                    <button>Cancel</button>
+                    <button className='cancel-button'>Cancel</button>
                     <button>Submit</button>
                 </div>
             </form>
