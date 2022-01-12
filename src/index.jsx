@@ -1,6 +1,5 @@
 import React from 'react'
 import ReactDom from 'react-dom'
-import web3 from 'web3'
 import './index.css'
 
 class Main extends React.Component {
