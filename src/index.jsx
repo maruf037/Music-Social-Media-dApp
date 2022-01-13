@@ -15,6 +15,9 @@ class Main extends React.Component {
         this.state = {
             isFormHidden: true
         }
+
+        this.setContractInstance()
+
     }
 
     render() {
@@ -30,7 +33,12 @@ class Main extends React.Component {
                     <button>Follow People</button>
                 </div>
 
-                <Form className={this.state.isFormHidden ? 'hidden' : ''} />
+                <Form className={this.state.isFormHidden ? 'hidden' : ''}
+                cancel={() => {this.setState({isFormHidden: true})
+                            }}
+                setupAccount={(name, age, status) => {this.setupAccount(name, age, status)
+                            }}
+                />
 
                 <h3>Latest musical recommendations from people using the dApp</h3>
                 <div ref="general-recommendations">
@@ -84,12 +92,43 @@ class Form extends React.Component {
                 <input className='form-input' type='number' ref='form-age' placeholder='Your age'/>
                 <textarea className='form-input form-textarea' ref='form-state' placeholder='Your state, a description about yourself'></textarea>
                 <div>
-                    <button className='cancel-button'>Cancel</button>
-                    <button>Submit</button>
+                    <button onClick={event => {event.preventDefault()this.props.cancel()
+                    }} className='cancel-button'>Cancel</button>
+                    <button onClick={event => {event.preventDefault()this.props.setupAccount(this.refs['form-name'].value, 
+                    this.refs['form-age'].value, this.refs['form-state'].value)
+                    }}>Submit</button>
                 </div>
             </form>
         )
     }
+}
+
+async getAccount() {
+    return (await myWeb3.eth.getAccounts() [0]
+    )
+}
+
+async setContractInstance() {
+    const contractAddress = '0x1a4B47A705030FfCd7718BFF94161CF83505c681'
+    const abi = ABI.abi
+    const contractInstance = new myWeb3.eth.Contract(abi, contractAddress, {
+        from: await this.getAccount(),
+        gasPrice: 2e9
+    })
+    await this.setState({contractInstance: contractInstance})
+}
+
+async setupAccount(name, age, status) {
+    await this.state.contractInstance.methods.setup(this.fillBytes32WithSpaces(name), 
+    age, status).send({from: '0x610048D5AEB5C1710Ef7c4C4c927990Cf3a6afc2'})
+}
+
+fillBytes32WithSpaces(name) {
+    let nameHex = myWeb3.utils.toHex(name)
+    for(let i = nameHex.length; i < 66; i++) {
+        nameHex = nameHex + '0'
+    }
+    return nameHex
 }
 
 ReactDom.render(<Main />, document.querySelector('#root'))
