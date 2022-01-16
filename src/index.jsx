@@ -23,6 +23,35 @@ class Main extends React.Component {
         
     }
 
+    async setContractInstance() {
+        const contractAddress = ABI.networks['3'].address
+        const abi = ABI.abi
+        const contractInstance = new myWeb3.eth.Contract(abi, contractAddress, {
+            from: await this.getAccount(),
+            gasPrice: 2e9
+        })
+        await this.setState({contractInstance: contractInstance})
+    }
+       
+    async setupAccount(name, age, status) {
+        await this.state.contractInstance.methods.setup(this.fillBytes32WithSpaces(name), 
+        age, status).send({from: '0x610048D5AEB5C1710Ef7c4C4c927990Cf3a6afc2'})
+    }
+    
+    fillBytes32WithSpaces(name) {
+        let nameHex = myWeb3.utils.toHex(name)
+        for(let i = nameHex.length; i < 66; i++) {
+            nameHex = nameHex + '0'
+        }
+        return nameHex;
+    }
+    
+    async addMusic(music) {
+        await this.state.contractInstance.methods.addSong(music).send(
+            {from: '0x1a4B47A705030FfCd7718BFF94161CF83505c681'}
+        )
+    }
+
     render() {
         return (
             <div>
@@ -199,39 +228,5 @@ class FollowPeopleUnit extends React.Component {
     }
 }
 
-async setContractInstance() {
-    const contractAddress = ABI.networks['3'].address
-    const abi = ABI.abi
-    const contractInstance = new myWeb3.eth.Contract(abi, contractAddress, {
-        from: await this.getAccount(),
-        gasPrice: 2e9
-    })
-    await this.setState({contractInstance: contractInstance})
-}
-
-async setupAccount(name, age, status) {
-    await this.state.contractInstance.methods.setup(this.fillBytes32WithSpaces(name), 
-    age, status).send(async getAccount() {
-        return (await myWeb3.eth.getAccounts() [0] )
-    }
-
-async setupAccount(name, age, status) {
-    await this.state.contractInstance.methods.setup(this.fillBytes32WithSpaces(name), 
-    age, status).send({from: '0x610048D5AEB5C1710Ef7c4C4c927990Cf3a6afc2'})
-}
-
-fillBytes32WithSpaces(name) {
-    let nameHex = myWeb3.utils.toHex(name)
-    for(let i = nameHex.length; i < 66; i++) {
-        nameHex = nameHex + '0'
-    }
-    return nameHex;
-}
-
-async addMusic(music) {
-    await this.state.contractInstance.methods.addSong(music).send(
-        {from: '0x1a4B47A705030FfCd7718BFF94161CF83505c681'}
-    )
-}
 
 ReactDom.render(<Main />, document.querySelector('#root'))

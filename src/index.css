@@ -30,21 +30,31 @@ button:hover {
     padding: 40px;
 }
 
-.recommendation-name, .recommendation-address {
+.follow-people-unit {
+    width: 40%;
+    margin: auto;
+    background-color: whitesmoke;
+    border-radius: 20px;
+    margin: 10px auto;
+    padding: 20px;
+}
+
+.recommendation-name, .recommendation-address, .follow-people-address,
+ .follow-people-name, .follow-people-age {
     display: inline-block;
     color: #444444;
     font-style: italic;
 }
 
-.recommendation-name {
+.recommendation-name, .follow-people-name {
     margin-right: 10px;
 }
 
-.recommendation-address {
+.recommendation-address, .follow-people-address {
     color: rgb(156, 156, 156);
 }
 
-.recommendation-song {
+.recommendation-song, .follow-poeple-recommendation {
     font-weight: bolder;
     font-size: 16pt;
     margin-top: 10px;
@@ -69,4 +79,14 @@ button:hover {
 
 .cancel-button {
     margin-right: 10px;
+}
+
+.follow-people-state {
+    font-style: italic;
+    font-weight: bolder;
+    color: #444444;
+}
+
+.follow-button {
+    margin-top: 10px;
 }
