@@ -11,7 +11,7 @@ contract SocialMusic {
     }
 
     mapping(address => User) public users;
-
+    address[] public userList;
     //To add a new music recommendation
     function addSong(string memory _songName) public {
         require(bytes(_songName).length > 0 && bytes(_songName).length <= 100);
@@ -34,5 +34,10 @@ contract SocialMusic {
          require(_user != address(0));
 
          users[msg.sender].following.push(_user);       
+    }
+
+    //Returns the array of users
+    function getUsersList() public view returns(address[] memory) {
+        return userList;
     }
 }
